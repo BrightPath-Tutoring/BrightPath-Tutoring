@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Path Tutoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #1B2A4A;
+    --navy-deep: #121D33;
+    --cream: #FAF8F4;
+    --paper: #F2EEE5;
+    --gold: #C9962C;
+    --gold-soft: #E8D4A4;
+    --slate: #5A6478;
+    --sage: #7A8B7F;
+    --line: #DEDAD0;
+    --font-display: 'Lora', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--navy);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(250,248,244,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1.3rem;
+    letter-spacing:-0.01em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .logo-mark{
+    width:22px; height:22px;
+    flex-shrink:0;
+  }
+  .nav-links{
+    display:flex; gap:36px; align-items:center;
+    font-size:0.92rem; font-weight:500;
+  }
+  .nav-links a{
+    color:var(--slate);
+    transition:color .15s ease;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--navy);}
+  .nav-cta{
+    background:var(--navy);
+    color:var(--cream) !important;
+    padding:10px 22px;
+    border-radius:3px;
+    font-weight:600;
+  }
+  .nav-cta:hover{background:var(--navy-deep);}
+  .nav-toggle{display:none;}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0; bottom:0;
+      background:var(--cream);
+      flex-direction:column;
+      padding:32px 28px;
+      gap:24px;
+      transform:translateX(100%);
+      transition:transform .25s ease;
+      align-items:flex-start;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{
+      display:block;
+      background:none; border:none; cursor:pointer;
+      width:32px; height:24px; position:relative;
+    }
+    .nav-toggle span{
+      display:block; position:absolute; left:0; right:0; height:2px;
+      background:var(--navy); transition:all .2s ease;
+    }
+    .nav-toggle span:nth-child(1){top:0;}
+    .nav-toggle span:nth-child(2){top:11px;}
+    .nav-toggle span:nth-child(3){top:22px;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(11px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-11px) rotate(-45deg);}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 110px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:60px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-size:0.78rem;
+    font-weight:600;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:28px; height:1px;
+    background:var(--gold);
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.3rem, 4.2vw, 3.4rem);
+    line-height:1.12;
+    font-weight:600;
+    color:var(--navy);
+    margin-bottom:22px;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold);
+  }
+  .hero p.lead{
+    font-size:1.12rem;
+    color:var(--slate);
+    max-width:480px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:14px 28px;
+    border-radius:3px;
+    font-weight:600;
+    font-size:0.95rem;
+    transition:all .15s ease;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--navy);
+    color:var(--cream);
+  }
+  .btn-primary:hover{background:var(--navy-deep); transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--navy);
+    border-color:var(--navy);
+  }
+  .btn-ghost:hover{background:var(--navy); color:var(--cream);}
+
+  /* Path SVG signature element */
+  .hero-visual{
+    position:relative;
+    height:420px;
+  }
+  .hero-visual svg{width:100%; height:100%;}
+  .path-line{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-dasharray:600;
+    stroke-dashoffset:600;
+    animation:draw 2.2s ease forwards .3s;
+  }
+  @keyframes draw{ to{stroke-dashoffset:0;} }
+  .path-dot{
+    opacity:0;
+    animation:fadein .5s ease forwards;
+  }
+  .path-dot circle{fill:var(--navy);}
+  .path-dot circle.milestone{fill:var(--gold);}
+  .path-dot text{
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    fill:var(--navy);
+  }
+  .path-dot.d1{animation-delay:.5s;}
+  .path-dot.d2{animation-delay:1.0s;}
+  .path-dot.d3{animation-delay:1.5s;}
+  .path-dot.d4{animation-delay:2.0s;}
+  @keyframes fadein{ to{opacity:1;} }
+
+  @media (max-width:760px){
+    .hero-inner{grid-template-columns:1fr; gap:40px;}
+    .hero{padding:48px 0 64px;}
+    .hero-visual{height:300px;}
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    max-width:560px;
+    margin-bottom:56px;
+  }
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{
+    font-family:var(--font-display);
+    font-size:clamp(1.8rem, 2.8vw, 2.4rem);
+    font-weight:600;
+    color:var(--navy);
+    line-height:1.2;
+  }
+  .section-head p{
+    color:var(--slate);
+    margin-top:14px;
+    font-size:1.02rem;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--paper);}
+  .about-inner{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:32px;
+  }
+  .about-card .stat{
+    font-family:var(--font-display);
+    font-size:2.6rem;
+    font-weight:700;
+    color:var(--navy);
+    line-height:1;
+  }
+  .about-card .stat-label{
+    color:var(--slate);
+    font-size:0.92rem;
+    margin-top:8px;
+  }
+  .about-card + .about-card{margin-top:20px;}
+  .about-text p{
+    color:var(--slate);
+    margin-bottom:18px;
+    font-size:1.02rem;
+  }
+  .about-text p:first-child{
+    font-size:1.12rem;
+    color:var(--navy);
+    font-weight:500;
+  }
+  .about-text strong{color:var(--navy); font-weight:600;}
+
+  @media (max-width:760px){
+    .about-inner{grid-template-columns:1fr;}
+  }
+
+  /* ---------- SUBJECTS / LADDER ---------- */
+  .ladder{
+    border-left:2px solid var(--line);
+    margin-left:14px;
+    padding-left:0;
+  }
+  .rung{
+    position:relative;
+    padding:0 0 48px 40px;
+    border-left:2px solid var(--line);
+    margin-left:0;
+  }
+  .rung:last-child{padding-bottom:0;}
+  .ladder-wrap{position:relative;}
+  .rung::before{
+    content:'';
+    position:absolute;
+    left:-7px; top:2px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--cream);
+    border:2px solid var(--gold);
+  }
+  .rung.active::before{background:var(--gold);}
+  .rung-label{
+    font-size:0.78rem;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .rung h3{
+    font-family:var(--font-display);
+    font-size:1.3rem;
+    font-weight:600;
+    color:var(--navy);
+    margin-bottom:8px;
+  }
+  .rung p{color:var(--slate); max-width:520px;}
+
+  .subjects-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    margin-top:8px;
+  }
+  .track-title{
+    font-family:var(--font-display);
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--navy);
+    margin-bottom:28px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+
+  @media (max-width:760px){
+    .subjects-grid{grid-template-columns:1fr; gap:48px;}
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{background:var(--navy); color:var(--cream);}
+  .how .section-head h2{color:var(--cream);}
+  .how .section-head p{color:#B8C0D4;}
+  .how .eyebrow{color:var(--gold-soft);}
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px;
+  }
+  .step{
+    padding:28px 0 0;
+    border-top:1px solid rgba(255,255,255,0.15);
+  }
+  .step-num{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.6rem;
+    color:var(--gold);
+    margin-bottom:14px;
+    display:block;
+  }
+  .step h3{
+    font-size:1.08rem;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .step p{color:#B8C0D4; font-size:0.96rem;}
+
+  @media (max-width:760px){
+    .steps{grid-template-columns:1fr; gap:28px;}
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-inner{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+  }
+  .contact-info p{color:var(--slate); margin-bottom:24px;}
+  .info-row{
+    display:flex; gap:14px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+  }
+  .info-row:last-child{border-bottom:1px solid var(--line);}
+  .info-row .ico{
+    width:18px; height:18px; flex-shrink:0; margin-top:2px;
+    color:var(--gold);
+  }
+  .info-row .label{font-weight:600; color:var(--navy); font-size:0.92rem;}
+  .info-row .val{color:var(--slate); font-size:0.92rem;}
+
+  form{
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  label{
+    font-size:0.85rem; font-weight:600; color:var(--navy);
+    margin-bottom:7px; display:block;
+  }
+  input, select, textarea{
+    width:100%;
+    font-family:var(--font-body);
+    font-size:0.96rem;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:var(--cream);
+    color:var(--navy);
+  }
+  input:focus, select:focus, textarea:focus{
+    border-color:var(--gold);
+  }
+  textarea{resize:vertical; min-height:110px;}
+  .field{display:flex; flex-direction:column;}
+  .submit-row{display:flex; align-items:center; gap:18px; margin-top:6px;}
+  .form-note{font-size:0.85rem; color:var(--slate);}
+  .form-status{
+    font-size:0.9rem; font-weight:500;
+    color:var(--sage);
+    display:none;
+  }
+  .form-status.show{display:block;}
+
+  @media (max-width:760px){
+    .contact-inner{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:#8C97AE;
+    padding:44px 0;
+  }
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  .footer-logo{
+    font-family:var(--font-display);
+    color:var(--cream);
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  .footer-inner p{font-size:0.86rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none">
+        <path d="M3 19C7 19 7 9 12 9C17 9 17 5 21 5" stroke="#C9962C" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="3" cy="19" r="2.3" fill="#1B2A4A"/>
+        <circle cx="21" cy="5" r="2.3" fill="#C9962C"/>
+      </svg>
+      Bright Path Tutoring
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#how">How it works</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">Math &amp; Coding Tutoring</div>
+        <h1>Find your <em>bright path</em> through math and code.</h1>
+        <p class="lead">One-on-one tutoring from Pre-Algebra through Algebra 1, plus beginner-friendly coding lessons — taught by a current high schooler who remembers exactly where the tricky parts are.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Book a session</a>
+          <a href="#subjects" class="btn btn-ghost">See what I teach</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 420 420">
+          <path class="path-line" d="M40 360 C 100 360, 100 280, 160 260 S 260 200, 280 140 S 360 80, 380 50" />
+          <g class="path-dot d1" transform="translate(40,360)">
+            <circle r="6"/>
+            <text x="14" y="5">Pre-Algebra</text>
+          </g>
+          <g class="path-dot d2" transform="translate(160,260)">
+            <circle r="6" class="milestone"/>
+            <text x="14" y="5">Algebra 1</text>
+          </g>
+          <g class="path-dot d3" transform="translate(280,140)">
+            <circle r="6"/>
+            <text x="14" y="5">Intro to Coding</text>
+          </g>
+          <g class="path-dot d4" transform="translate(380,50)">
+            <circle r="6" class="milestone"/>
+            <text x="-58" y="5" text-anchor="end">You, ahead of the curve</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-inner">
+      <div>
+        <div class="about-card">
+          <div class="stat">12th</div>
+          <div class="stat-label">Grade — currently enrolled in AP Calculus</div>
+        </div>
+        <div class="about-card">
+          <div class="stat">1:1</div>
+          <div class="stat-label">Every session, fully personalized</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>I'm a current senior taking Calculus, and I started Bright Path because I remember exactly what it's like to get stuck on a concept that everyone else seems to get instantly.</p>
+        <p>The gap between "the teacher explained it" and "I actually understand it" is where most students lose confidence — and it's the gap I focus on closing. I tutor math up through <strong>Algebra 1</strong>, and teach <strong>beginner coding</strong>, because both subjects build on themselves: master the fundamentals now, and everything after gets easier.</p>
+        <p>Sessions are one-on-one, paced to how you actually think, not how a textbook assumes you think.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBJECTS -->
+  <section id="subjects">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">What I teach</div>
+        <h2>Two subjects. One focus: real understanding.</h2>
+        <p>Math sessions build step by step toward Algebra 1. Coding sessions start from zero — no experience required.</p>
+      </div>
+
+      <div class="subjects-grid">
+        <div>
+          <div class="track-title">Math, building block by block</div>
+          <div class="ladder-wrap">
+            <div class="rung">
+              <div class="rung-label">Foundations</div>
+              <h3>Pre-Algebra</h3>
+              <p>Fractions, ratios, negative numbers, and the order of operations — the groundwork everything else stands on.</p>
+            </div>
+            <div class="rung active">
+              <div class="rung-label">Core focus</div>
+              <h3>Algebra 1</h3>
+              <p>Linear equations, graphing, systems, exponents, and word problems — taught with the same intuition I use in my own coursework today.</p>
+            </div>
+            <div class="rung">
+              <div class="rung-label">Test prep</div>
+              <h3>Algebra 1 exam &amp; quiz prep</h3>
+              <p>Targeted review before tests, with practice problems pulled from real exam patterns.</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="track-title">Coding, from a blank screen up</div>
+          <div class="ladder-wrap">
+            <div class="rung">
+              <div class="rung-label">Foundations</div>
+              <h3>Intro to Python</h3>
+              <p>Variables, loops, and functions — written in plain English first, then in code.</p>
+            </div>
+            <div class="rung active">
+              <div class="rung-label">Core focus</div>
+              <h3>Building small projects</h3>
+              <p>Turn lessons into something real: a calculator, a guessing game, a simple website — proof you can actually build things.</p>
+            </div>
+            <div class="rung">
+              <div class="rung-label">Next step</div>
+              <h3>Intro to web basics (HTML/CSS)</h3>
+              <p>For students who want to see their code rendered on an actual page.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Getting started</div>
+        <h2>Simple to begin, easy to stick with.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">i.</span>
+          <h3>Send a message</h3>
+          <p>Fill out the form below with what you're working on and your availability. I'll reply within a day.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">ii.</span>
+          <h3>Free intro call</h3>
+          <p>A short, no-pressure call to figure out where you're at and what a typical session should look like.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">iii.</span>
+          <h3>Start your sessions</h3>
+          <p>Weekly or as-needed, in person or over video — whatever fits your schedule best.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-inner">
+      <div class="contact-info">
+        <div class="eyebrow">Get in touch</div>
+        <h2 style="font-family:var(--font-display); font-size:1.9rem; color:var(--navy); margin-bottom:14px;">Let's find your starting point.</h2>
+        <p>Tell me what subject you need help with and a bit about your schedule. First call is free.</p>
+
+        <div class="info-row">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 7l9 6 9-6M3 7v10h18V7M3 7l9-4 9 4"/></svg>
+          <div>
+            <div class="label">Email</div>
+            <div class="val">sairohan.pasumart@gmail.com</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <div>
+            <div class="label">Response time</div>
+            <div class="val">Within 24 hours</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div>
+            <div class="label">Sessions</div>
+            <div class="val">In person locally, or online by video</div>
+          </div>
+        </div>
+      </div>
+
+      <form id="contactForm" action="https://formspree.io/f/xbdvawek" method="POST">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="grade">Grade level</label>
+            <input type="text" id="grade" name="grade" placeholder="e.g. 8th grade">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="subject">Subject interested in</label>
+            <select id="subject" name="subject">
+              <option>Pre-Algebra</option>
+              <option>Algebra 1</option>
+              <option>Intro to Coding</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">What would you like help with?</label>
+          <textarea id="message" name="message" placeholder="A bit about what you're struggling with, or your goals."></textarea>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <span class="form-status" id="formStatus">Thanks — I'll get back to you within a day.</span>
+        </div>
+        <p class="form-note">Submissions go straight to my inbox — I'll reply within a day.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-logo">Bright Path Tutoring</div>
+    <p>&copy; 2026 Bright Path Tutoring. Built with care, one lesson at a time.</p>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        status.textContent = "Thanks — I'll get back to you within a day.";
+        status.classList.add('show');
+        form.reset();
+      } else {
+        status.textContent = "Something went wrong — try again or email me directly.";
+        status.classList.add('show');
+      }
+    }).catch(() => {
+      status.textContent = "Something went wrong — try again or email me directly.";
+      status.classList.add('show');
+    });
+  });
+</script>
+
+</body>
+</html>
