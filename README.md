@@ -1,2 +1,2 @@
-# [BrightPath-Tutoring][brightpath-tutoring.github.io]
-<sub> This is the codebase for BrightPath Tutoring, Check it out if you want! </sub>
+[BrightPath Tutoring][brightpath-tutoring.github.io]
+This is the codebase for BrightPath Tutoring, Check it out if you want!
